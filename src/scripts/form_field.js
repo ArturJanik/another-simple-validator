@@ -31,9 +31,7 @@ class FormField {
   }
 
   get isValid () { 
-    return ((this.required && this.touched && this.valid) 
-            || (this.touched && this.valid) 
-            || (!this.touched && !this.required));
+    return ((this.touched && this.valid) || (!this.touched && !this.required));
   }
 
   onChangeHandler = e => {
@@ -45,7 +43,7 @@ class FormField {
   }
 
   updateClasses = () => {
-    if(this.value.length > 0){
+    if(this.touched){
       this.el.classList.add('dirty');
     } else {
       this.el.classList.remove('dirty');
@@ -85,9 +83,7 @@ class FormField {
     let valid = true;
     switch (this.type) {
       case 'email':
-        if((this.required && this.touched) || this.value.length > 0) {
-          valid = this.validateEmail(this.value);
-        }
+        valid = this.validateEmail(this.value);
         return valid;
       default:
         return valid;
@@ -116,18 +112,25 @@ class FormField {
           console.log(`Validator ${validator} unavailable.`);
           break;
       }
+      if(!valid) return valid;
     }
 
     return valid;
   }
 
-  validate = () => {
+  validate = (force = false) => {
     let valid = true;
 
     if(!this.ignoreDefaults) valid = this.defaultValidations();
     if(!this.type.includes('select')) valid = this.customValidations(valid);
+    if((this.required && !this.touched) || (this.required && this.touched && this.value === '')) valid = false;
 
     this.valid = valid;
+
+    if(force) {
+      this.touched = true;
+      this.updateClasses();
+    }
   }
 
   resetState = () => {
@@ -178,9 +181,7 @@ class RadioField {
   }
 
   get isValid () { 
-    return ((this.required && this.touched && this.valid) 
-            || (this.touched && this.valid) 
-            || (!this.touched && !this.required));
+    return (this.touched && this.checked) || !this.required;
   }
 
   onChangeHandler = e => {

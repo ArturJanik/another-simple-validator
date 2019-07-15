@@ -30,6 +30,8 @@ class Form {
   });
 
   validate = () => this.valid = this.fields.every(f => f.isValid);
+
+  validateAllFields = () => this.fields.forEach(f => f.validate(true));
   
   updateClasses = () => {
     if(this.valid){
