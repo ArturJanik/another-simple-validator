@@ -71,7 +71,7 @@ body {
       font-family: 'Roboto', sans-serif;
       font-size: 1.4rem;
     }
-    .btn {
+    .form__btn {
       background: $maincolor;
       box-shadow: 0px 1px 5px -1px rgba(0, 0, 0, 0.2);
       color: #fff;
@@ -84,11 +84,12 @@ body {
         background: #ffffff;
         color: $maincolor;
       }
-      &--disabled {
+      &.disabled {
         opacity: .3;
         &:hover {
-          background: #ffffff;
-          color: $maincolor;
+          background: $maincolor;
+          color: #ffffff;
+          cursor: default;
         }
       }
     }
