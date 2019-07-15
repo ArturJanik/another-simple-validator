@@ -139,8 +139,6 @@ class FormField {
   }
 }
 
-export default FormField;
-
 class RadioField {
   constructor(
     selector,
@@ -194,16 +192,12 @@ class RadioField {
   }
 
   updateClasses = () => {
-    document.querySelector(`input[name="${this.name}"]`).forEach(el => el.classList.remove('dirty'));
+    document.querySelectorAll(`input[name="${this.name}"]`).forEach(el => el.classList.remove('dirty'));
     document.querySelector(`input[name="${this.name}"]:checked`).classList.add('dirty');
-    // if(this.valid){
-    //   this.el.classList.remove('error');
-    // } else {
-    //   this.el.classList.add('error');
-    // }
   }
 
   validate = () => this.valid = (this.checked || !this.required) ? true : false;
 }
 
+export default FormField;
 export { RadioField };

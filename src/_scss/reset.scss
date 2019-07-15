@@ -8,7 +8,7 @@ a,abbr,acronym,address,applet,article,aside,audio,b,big,blockquote,body,canvas,c
 article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section {
   display:block;
 }
-html{-ms-text-size-adjust:none;-webkit-text-size-adjust:none}
+html{text-size-adjust:none;-ms-text-size-adjust:none;-webkit-text-size-adjust:none}
 body{line-height:1.42em;overflow-x:hidden}
 ul{list-style:none}
 ol{list-style:decimal}
@@ -64,6 +64,7 @@ html input[type="button"],
 input[type="reset"],
 input[type="submit"] {
   -webkit-appearance: button;
+  appearance: button;
   cursor: pointer;
 }
 
