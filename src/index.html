@@ -16,7 +16,7 @@
       <div class="column__right">
         <form>
           <div class="form__field">
-            <select name="">
+            <select id="form__subject" name="subject">
               <option disabled selected value>Select subject</option>
               <option value="subject-1">Subject #1</option>
               <option value="subject-2">Subject #2</option>
@@ -24,16 +24,24 @@
             </select>
           </div>
           <div class="form__field">
-            <input type="text" name="" />
+            <input type="text" id="form__name" name="name" />
             <label>Name</label>
           </div>
           <div class="form__field">
-            <input type="email" name="" />
+            <input type="email" id="form__email" name="email" />
             <label>E-mail</label>
           </div>
           <div class="form__field">
-            <textarea name=""></textarea>
+            <textarea id="form__message" name="message"></textarea>
             <label>Message</label>
+          </div>
+          <div class="form__field">
+            <input type="radio" id="radio1" name="radiogroup" value="radio1" />
+            <label for="radio1">Mail</label>
+            <input type="radio" id="radio2" name="radiogroup" value="radio2" />
+            <label for="radio2">Mail</label>
+            <input type="radio" id="radio3" name="radiogroup" value="radio3" />
+            <label for="radio3">Mail</label>
           </div>
           <button type="submit" class="btn">Submit</button>
         </form>

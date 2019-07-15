@@ -1,2 +1,9 @@
 # simple-validator
-Simple class based JS form validator
+
+Simple JS form validator.
+
+## Usage
+
+```javascript
+
+```
