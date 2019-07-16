@@ -1,11 +1,11 @@
 # simple-validator
 
-Simple JS form validator is style-agnostic form validation. Styling of inputs responding to their validity state is up to you, library provides only js logic for validation. By default it will add `.dirty` class to inputs which were manipulated by user, and `.error` class to mark invalid ones, but you can change those classes in library config.
+Simple JS form validator is style-agnostic form field validator. Styling of inputs responding to their validity state is up to you, library provides only js logic for validation. 
+By default it will add `.dirty` class to inputs which were manipulated by user, and `.error` class to mark invalid ones, but you can change these classes in library config.
 
 ## Basic config
 
-First create form fields with unique `name` and `id` attributes for each field (except for radio buttons where we use one name for whole group of buttons).
-We also create a button that will handle form submition. By default I have added `.disabled` class to the btn, which will be toggled during validations.
+First we create form fields with unique `name` and `id` attributes for each field (except for radio buttons where we use one name for whole group of buttons).
 
 ```html
 <select id="form__subject" name="subject">
@@ -25,7 +25,11 @@ We also create a button that will handle form submition. By default I have added
 <label for="radio2">Mail</label>
 <input type="radio" id="radio3" name="radiogroup" value="radio3" />
 <label for="radio3">Mail</label>
+```
 
+We also have to add a button that will handle form submision. By default I have added `.disabled` class to the btn, which will be toggled during validations.
+
+```html
 <button type="submit" class="form__btn disabled">Submit</button>
 ```
 
@@ -106,13 +110,14 @@ const formConfig = {
   ],
   submitBtn: {
     selector: '.btnClass',
-    onSubmit: () => console.log('Callback function called on successfull form submit'),
+    onSubmit: (values) => console.log('Callback function called on successfull form submit. Returns object will {field: value} pairs'),
     disabledClass: '.disabled'          // class to add when button should be disabled (form invalid)
   },
   errorClass: '.err',                   // class to add on error
   dirtyClass: '.drr'                    // class to add to touched inputs
 }
 ```
+
 ## Available validators
 
 ```javascript
