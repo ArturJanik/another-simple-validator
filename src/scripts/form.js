@@ -12,7 +12,7 @@ class Form {
   ){
     this.error = null;
     try {
-      if(this.validateFieldsConfig(fields)) throw(`Error: no fields passed to form constructor.`);
+      if(!this.validateFieldsConfig(fields)) throw(`Error: no fields passed to form constructor.`);
       this.fieldOptions = fields;
       this.errorClass = removeDotFromClassname(errorClass) || 'error';
       this.dirtyClass = removeDotFromClassname(dirtyClass) || 'dirty';
@@ -29,6 +29,7 @@ class Form {
 
   validateFieldsConfig = fields => {
     if(!fields || fields.length < 1) return false;
+    return true;
   }
 
   get fieldValues() {
