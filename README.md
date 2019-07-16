@@ -17,7 +17,7 @@ You should see test form, which you can modify to your needs to test validator.
 
 #### With npm
 
-
+Run `npm i another-simple-validator`.
 
 #### Classic js
 
