@@ -14,7 +14,8 @@ class FormField {
   ){
     this.error = null;
     try {
-      if(typeof selector !== 'string') throw(`Error: form field selector should be string - ${typeof selector} passed.`);
+      if(typeof selector !== 'string') throw(`Error: form field selector should be string - '${typeof selector}' passed.`);
+      if(selector.trim() === '') throw(`Error: empty form field selector passed.`);
       this.el = document.querySelector(selector);
       if(!this.el) throw(`Error: element '${selector}' does not exist.`);
       this.name = this.el.getAttribute('name');
@@ -31,7 +32,7 @@ class FormField {
       this.errorClass = errorClass;
       this.dirtyClass = dirtyClass;
       this.cb = cb;
-    } catch (err) {this.error = err}
+    } catch (err) {this.error = err; console.error(this.error)}
   }
 
   get isValid () { 
@@ -113,7 +114,7 @@ class FormField {
         case 'regex':
           valid = this.validatePattern(validatorSetting);
         default:
-          console.log(`Validator ${validator} unavailable.`);
+          console.warn(`Validator ${validator} unavailable.`);
           break;
       }
       if(!valid) return valid;
@@ -123,6 +124,7 @@ class FormField {
   }
 
   validate = (force = false) => {
+    if(this.error) return;
     let valid = true;
 
     if(!this.ignoreDefaults) valid = this.defaultValidations();
@@ -164,6 +166,7 @@ class RadioField {
     this.error = null;
     try {
       if(typeof selector !== 'string') throw(`Error: form field selector should be string - ${typeof selector} passed.`);
+      if(selector.trim() === '') throw(`Error: empty form field selector passed.`);
       this.el = document.getElementsByName(selector);
 
       if(this.el.length < 1) throw(`Error: passed '${selector}' is not correct radio field name.`);
@@ -182,7 +185,7 @@ class RadioField {
       this.errorClass = errorClass;
       this.dirtyClass = dirtyClass;
       this.cb = cb;
-    } catch (err) {this.error = err}
+    } catch (err) {this.error = err; console.error(this.error)}
   }
 
   get checked() {

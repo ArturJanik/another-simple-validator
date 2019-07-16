@@ -1,7 +1,7 @@
 {
   "name": "simple-validator",
-  "version": "0.1.1",
-  "description": "Simple class based JS form validator",
+  "version": "0.2.0",
+  "description": "Simple JS form validator",
   "main": "dist/simpleval.dist.js",
   "scripts": {
     "dev": "webpack-dev-server --mode development --open --config webpack.dev.js",

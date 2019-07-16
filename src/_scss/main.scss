@@ -214,6 +214,8 @@ body {
       }
       input[type=radio] {
         @include checkboxAndRadio;
+        position: absolute; // FF fix
+        z-index: -1; // FF fix
         + label {
           &:before {
             @include checkboxAndRadioBefore;
