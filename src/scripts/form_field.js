@@ -18,7 +18,7 @@ class FormField {
       this.el = document.querySelector(selector);
       if(!this.el) throw(`Error: element '${selector}' does not exist.`);
       this.name = this.el.getAttribute('name');
-      this.el.addEventListener('keyup', this.onChangeHandler);
+      this.el.addEventListener('input', this.onChangeHandler);
       this.el.addEventListener('change', this.onChangeHandler);
       this.type = this.el.type;
       this.value = this.el.value;
@@ -155,7 +155,9 @@ class RadioField {
     {
       required = false,
       touched = false,
-      validateAutomatically = true
+      validateAutomatically = true,
+      errorClass,
+      dirtyClass
     } = {},
     cb = null
   ){
@@ -177,6 +179,8 @@ class RadioField {
       this.required = required;
       this.touched = touched;
       this.validateAutomatically = validateAutomatically;
+      this.errorClass = errorClass;
+      this.dirtyClass = dirtyClass;
       this.cb = cb;
     } catch (err) {this.error = err}
   }
@@ -200,14 +204,14 @@ class RadioField {
   }
 
   updateClasses = () => {
-    this.el.forEach(el => el.classList.remove('dirty'));
+    this.el.forEach(el => el.classList.remove(this.dirtyClass));
     const checked = document.querySelector(`input[name="${this.name}"]:checked`);
-    if(checked) checked.classList.add('dirty');
+    if(checked) checked.classList.add(this.dirtyClass);
 
     if(!this.valid) {
-      this.el.forEach(el => el.classList.add('error'));
+      this.el.forEach(el => el.classList.add(this.errorClass));
     } else {
-      this.el.forEach(el => el.classList.remove('error'));
+      this.el.forEach(el => el.classList.remove(this.errorClass));
     }
   }
 
