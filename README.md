@@ -11,7 +11,51 @@ By default it will add `.dirty` class to inputs which were manipulated by user, 
 
 You should see test form, which you can modify to your needs to test validator.
 
-## Basic config
+## Basics
+
+### Installation
+
+#### With npm
+
+
+
+#### Classic js
+
+1. Download `simpleval.dist.js` from `dist` directory and copy it into your project directory
+2. Include it in html:
+
+```html
+<script src="./simpleval.dist.js"></script>
+```
+
+3. Create form object with `SimpleVal` constructor
+
+```javascript
+const form = new SimpleVal({
+  ...formOptions
+});
+```
+
+### Supported field types
+
+- inputs: text, email, password
+- select-one
+- textarea
+- radio
+- checkbox
+
+### Available validators
+
+```javascript
+{
+  minLength: 6,
+  maxLength: 10,
+  numericality: true,
+  regex: /^[^\D]\d{0,9}((\.|,)\d{1,})?$/
+}
+```
+
+### Configuration
 
 First we create form fields with unique `name` and `id` attributes for each field (except for radio buttons where we use one name for whole group of buttons).
 
@@ -20,19 +64,15 @@ First we create form fields with unique `name` and `id` attributes for each fiel
   <option disabled selected value>Select subject</option>
   <option value="subject-1">Subject #1</option>
   <option value="subject-2">Subject #2</option>
-  <option value="subject-3">Subject #3</option>
 </select>
 
 <input type="text" id="form__name" name="name" />
-
 <input type="email" id="form__email" name="email" />
 
 <input type="radio" id="radio1" name="radiogroup" value="radio1" />
-<label for="radio1">Mail</label>
+<label for="radio1">Radio #1</label>
 <input type="radio" id="radio2" name="radiogroup" value="radio2" />
-<label for="radio2">Mail</label>
-<input type="radio" id="radio3" name="radiogroup" value="radio3" />
-<label for="radio3">Mail</label>
+<label for="radio2">Radio #2</label>
 ```
 
 We also have to add a button that will handle form submision. By default I have added `.disabled` class to the btn, which will be toggled during validations.
@@ -83,15 +123,7 @@ const form = new Form(formConfig);
 
 And that's basically all, we should have our form validations up and ready.
 
-### Supported field types
-
-- inputs: text, email, password
-- select-one
-- textarea
-- radio
-- checkbox
-
-## Form config object
+## Form configuration object
 
 Here you can see form config object with all currently available options and their default values:
 
@@ -124,16 +156,5 @@ const formConfig = {
   },
   errorClass: '.err',                   // class to add on error
   dirtyClass: '.drr'                    // class to add to touched inputs
-}
-```
-
-## Available validators
-
-```javascript
-{
-  minLength: 6,
-  maxLength: 10,
-  numericality: true,
-  regex: /^[^\D]\d{0,9}((\.|,)\d{1,})?$/
 }
 ```
