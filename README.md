@@ -36,7 +36,7 @@ We also have to add a button that will handle form submision. By default I have 
 Next, we setup our form by passing options object to new Form constructor.
 
 ```javascript
-import Form from './scripts/form';
+import Form from './scripts/simpleval.dist.js';
 
 const formConfig = {
   fields: [
