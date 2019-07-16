@@ -6,7 +6,9 @@ class FormField {
       required = false,
       touched = false,
       ignoreDefaults = false,
-      validateAutomatically = true
+      validateAutomatically = true,
+      errorClass,
+      dirtyClass
     } = {},
     cb = null
   ){
@@ -26,6 +28,8 @@ class FormField {
       this.touched = touched;
       this.ignoreDefaults = ignoreDefaults;
       this.validateAutomatically = validateAutomatically;
+      this.errorClass = errorClass;
+      this.dirtyClass = dirtyClass;
       this.cb = cb;
     } catch (err) {this.error = err}
   }
@@ -44,14 +48,14 @@ class FormField {
 
   updateClasses = () => {
     if(this.touched){
-      this.el.classList.add('dirty');
+      this.el.classList.add(this.dirtyClass);
     } else {
-      this.el.classList.remove('dirty');
+      this.el.classList.remove(this.dirtyClass);
     }
     if(this.valid){
-      this.el.classList.remove('error');
+      this.el.classList.remove(this.errorClass);
     } else {
-      this.el.classList.add('error');
+      this.el.classList.add(this.errorClass);
     }
   }
 
@@ -128,7 +132,6 @@ class FormField {
     this.valid = valid;
 
     if(force) {
-      this.touched = true;
       this.updateClasses();
     }
   }
@@ -193,11 +196,21 @@ class RadioField {
   }
 
   updateClasses = () => {
-    document.querySelectorAll(`input[name="${this.name}"]`).forEach(el => el.classList.remove('dirty'));
-    document.querySelector(`input[name="${this.name}"]:checked`).classList.add('dirty');
+    this.el.forEach(el => el.classList.remove('dirty'));
+    const checked = document.querySelector(`input[name="${this.name}"]:checked`);
+    if(checked) checked.classList.add('dirty');
+
+    if(!this.valid) {
+      this.el.forEach(el => el.classList.add('error'));
+    } else {
+      this.el.forEach(el => el.classList.remove('error'));
+    }
   }
 
-  validate = () => this.valid = (this.checked || !this.required) ? true : false;
+  validate = (force = false) => {
+    this.valid = (this.checked || !this.required) ? true : false;
+    if(force) this.updateClasses();
+  }
 }
 
 export default FormField;
