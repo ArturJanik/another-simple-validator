@@ -1,6 +1,6 @@
 {
-  "name": "simple-validator",
-  "version": "0.2.0",
+  "name": "another-simple-validator",
+  "version": "0.2.1",
   "description": "Simple JS form validator",
   "main": "dist/simpleval.dist.js",
   "scripts": {
