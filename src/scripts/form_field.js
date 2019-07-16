@@ -126,8 +126,12 @@ class FormField {
     let valid = true;
 
     if(!this.ignoreDefaults) valid = this.defaultValidations();
-    if(!this.type.includes('select')) valid = this.customValidations(valid);
-    if((this.required && !this.touched) || (this.required && this.touched && this.value === '')) valid = false;
+    if(!this.type.includes('select') && this.type !== 'checkbox') valid = this.customValidations(valid);
+    if(
+      (this.required && !this.touched) 
+      || (this.required && this.touched && this.value === '')
+      || (this.type === 'checkbox' && !this.el.checked)
+    ) valid = false;
 
     this.valid = valid;
 
