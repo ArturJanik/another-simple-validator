@@ -170,7 +170,7 @@ body {
       textarea {
         height: 160px;
       }
-      input[type=radio] {
+      @mixin checkboxAndRadio {
         display: none;
         &:checked {
           + label {
@@ -189,10 +189,31 @@ body {
           display: flex;
           font-size: 1.6rem;
           margin-right: 10px;
+        }
+      }
+      input[type=radio] {
+        @include checkboxAndRadio;
+        + label {
           &:before {
             background: #fff;
             border: 2px solid $maincolor;
             border-radius: 50%;
+            box-shadow: 0px 1px 5px -1px rgba(0, 0, 0, 0.2);
+            content: '';
+            display: inline-block;
+            height: 20px;
+            margin-right: 5px;
+            transition: background-color .2s ease;
+            width: 20px;
+          }
+        }
+      }
+      input[type=checkbox] {
+        @include checkboxAndRadio;
+        + label {
+          &:before {
+            background: #fff;
+            border: 2px solid $maincolor;
             box-shadow: 0px 1px 5px -1px rgba(0, 0, 0, 0.2);
             content: '';
             display: inline-block;
