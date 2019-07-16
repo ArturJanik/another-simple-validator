@@ -77,7 +77,7 @@ And that's basically all, we should have our form validations up and ready.
 
 ### Supported field types
 
-- input
+- inputs: text, email
 - select-one
 - textarea
 - radio

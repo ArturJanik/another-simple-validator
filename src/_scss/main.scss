@@ -16,11 +16,8 @@ body {
   align-items: center;
   display: flex;
   justify-content: center;
-  height: 100vh;
+  margin-top: 10%;
   width: 100vw;
-  @media screen and (max-height: 600px) {
-    height: auto;
-  }
 }
 .form__wrapper {
   align-items: stretch;
@@ -73,6 +70,9 @@ body {
     }
     @media screen and (max-width: 768px) {
       padding: 20px 40px;
+    }
+    @media screen and (max-width: 480px) {
+      padding: 20px;
     }
   }
   form {
@@ -171,7 +171,9 @@ body {
         height: 160px;
       }
       @mixin checkboxAndRadio {
-        display: none;
+        height: 0;
+        opacity: 0;
+        width: 0;
         &:checked {
           + label {
             &:before {
@@ -184,6 +186,13 @@ body {
             color: $errorColor;
           }
         }
+        &:focus {
+          + label {
+            &:before {
+              border: 2px solid rgba($maincolor, .5);
+            }
+          }
+        }
         + label {
           align-items: center;
           display: flex;
@@ -191,20 +200,24 @@ body {
           margin-right: 10px;
         }
       }
+      @mixin checkboxAndRadioBefore {
+        background: #fff;
+        border: 2px solid $maincolor;
+        box-shadow: 0px 1px 5px -1px rgba(0, 0, 0, 0.2);
+        content: '';
+        display: inline-block;
+        flex: 0 0 20px;
+        height: 20px;
+        margin-right: 5px;
+        transition: background-color .2s ease;
+        width: 20px;
+      }
       input[type=radio] {
         @include checkboxAndRadio;
         + label {
           &:before {
-            background: #fff;
-            border: 2px solid $maincolor;
+            @include checkboxAndRadioBefore;
             border-radius: 50%;
-            box-shadow: 0px 1px 5px -1px rgba(0, 0, 0, 0.2);
-            content: '';
-            display: inline-block;
-            height: 20px;
-            margin-right: 5px;
-            transition: background-color .2s ease;
-            width: 20px;
           }
         }
       }
@@ -212,15 +225,7 @@ body {
         @include checkboxAndRadio;
         + label {
           &:before {
-            background: #fff;
-            border: 2px solid $maincolor;
-            box-shadow: 0px 1px 5px -1px rgba(0, 0, 0, 0.2);
-            content: '';
-            display: inline-block;
-            height: 20px;
-            margin-right: 5px;
-            transition: background-color .2s ease;
-            width: 20px;
+            @include checkboxAndRadioBefore;
           }
         }
       }
