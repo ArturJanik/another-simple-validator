@@ -2,16 +2,33 @@ import FormField, { RadioField } from './form_field';
 import { removeDotFromClassname } from './helpers';
 
 class Form {
-  constructor({fields, submitBtn, errorClass, dirtyClass}){
-    this.fieldOptions = fields;
-    this.errorClass = removeDotFromClassname(errorClass) || 'error';
-    this.dirtyClass = removeDotFromClassname(dirtyClass) || 'dirty';
-    this.fields = this.createFields();
-    this.submitBtn = document.querySelector(submitBtn.selector);
-    this.submitBtn.addEventListener('click', this.submitHandler);
-    this.onSubmit = submitBtn.onSubmit || (() => console.warn('Form config: No "submitHandler" callback option passed in your Submit button options.'));
-    this.disabledClass = removeDotFromClassname(submitBtn.disabledClass) || 'disabled';
-    this.valid = false;
+  constructor(
+    {
+      fields, 
+      submitBtn = null, 
+      errorClass, 
+      dirtyClass
+    } = {}
+  ){
+    this.error = null;
+    try {
+      if(this.validateFieldsConfig(fields)) throw(`Error: no fields passed to form constructor.`);
+      this.fieldOptions = fields;
+      this.errorClass = removeDotFromClassname(errorClass) || 'error';
+      this.dirtyClass = removeDotFromClassname(dirtyClass) || 'dirty';
+      this.fields = this.createFields();
+      if(submitBtn) {
+        this.submitBtn = document.querySelector(submitBtn.selector);
+        this.submitBtn.addEventListener('click', this.submitHandler);
+        this.onSubmit = submitBtn.onSubmit || (() => console.warn('Form config: No "submitHandler" callback option passed in your Submit button options.'));
+        this.disabledClass = removeDotFromClassname(submitBtn.disabledClass) || 'disabled';
+      }
+      this.valid = false;
+    } catch (err) {this.error = err; console.error(this.error)}
+  }
+
+  validateFieldsConfig = fields => {
+    if(!fields || fields.length < 1) return false;
   }
 
   get fieldValues() {
@@ -32,7 +49,7 @@ class Form {
       dirtyClass: this.dirtyClass
     }
 
-    if(f.options.type === 'radio') {
+    if(f.options && f.options.type === 'radio') {
       return new RadioField(f.selector, fOptions, this.fieldChangeHandler)
     } else {
       return new FormField(f.selector, fOptions, this.fieldChangeHandler)
@@ -44,6 +61,7 @@ class Form {
   forceFieldValidation = () => this.fields.forEach(f => f.validate(true));
   
   updateClasses = () => {
+    if(!this.submitBtn) return;
     if(this.valid){
       this.submitBtn.classList.remove(this.disabledClass);
     } else {

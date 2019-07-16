@@ -3,6 +3,14 @@
 Simple JS form validator is style-agnostic form field validator. Styling of inputs responding to their validity state is up to you, library provides only js logic for validation. 
 By default it will add `.dirty` class to inputs which were manipulated by user, and `.error` class to mark invalid ones, but you can change these classes in library config.
 
+## Demo
+
+1. Clone repository
+2. Run `npm install`
+3. Run `npm run dev`
+
+You should see test form, which you can modify to your needs to test validator.
+
 ## Basic config
 
 First we create form fields with unique `name` and `id` attributes for each field (except for radio buttons where we use one name for whole group of buttons).

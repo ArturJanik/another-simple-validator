@@ -56,4 +56,4 @@ const formConfig = {
 
 const form = new Form(formConfig);
 
-document.querySelector('.validate__btn').addEventListener('click', form.forceFieldValidation);
+document.querySelector('.validate__btn').addEventListener('click', form2.forceFieldValidation);
