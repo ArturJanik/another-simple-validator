@@ -19,6 +19,9 @@ module.exports = {
   },
   output: {
     filename: 'simpleval.dist.js',
+    library: 'SimpleVal',
+    libraryExport: 'default',
+    libraryTarget: 'umd',
     path: path.resolve(__dirname, 'dist')
   }
 };
