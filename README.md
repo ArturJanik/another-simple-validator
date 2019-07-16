@@ -81,6 +81,7 @@ And that's basically all, we should have our form validations up and ready.
 - select-one
 - textarea
 - radio
+- checkbox
 
 ## Form config object
 
@@ -100,7 +101,7 @@ const formConfig = {
       }
     },
     {
-      // radio buttons do not accept any validators except for 'required' option
+      // radio buttons and checkboxes do not accept any validators except for 'required' option
       selector: 'radiogroup',
       options: {
         type: 'radio',                  // for radio buttons it is required to pass 'type' option

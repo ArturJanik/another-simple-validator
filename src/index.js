@@ -33,6 +33,12 @@ const formConfig = {
       }
     },
     {
+      selector: '#form__checkbox',
+      options: {
+        required: true
+      }
+    },
+    {
       selector: '#form__message',
       options: {
         validators: {
