@@ -19,6 +19,11 @@ You should see test form, which you can modify to your needs to test validator.
 
 Run `npm i another-simple-validator`.
 
+```javascript
+import Form from 'another-simple-validator';
+const form = new Form({});
+```
+
 #### Classic js
 
 1. Download `simpleval.dist.js` from `dist` directory and copy it into your project directory
