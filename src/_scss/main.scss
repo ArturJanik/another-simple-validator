@@ -1,0 +1,236 @@
+@import "./reset.scss";
+
+$maincolor: #397696;
+$errorColor: #c25454;
+
+html {
+  font-family: 'Roboto', sans-serif;
+  font-size: 62.5%;
+}
+
+body {
+  background: $maincolor;
+}
+
+.wrapper {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin-top: 10%;
+  width: 100vw;
+}
+.form__wrapper {
+  align-items: stretch;
+  box-shadow: 0px 0px 30px 5px rgba(0,0,0,.2);
+  display: flex;
+  width: 920px;
+  @media screen and (max-width: 600px) {
+    display: block;
+  }
+  .column__left {
+    align-items: center;
+    background: rgb(255,255,255);
+    background: linear-gradient(180deg, rgba(65,128,160,1) 0%, rgba(85,147,180,1) 100%);
+    display: flex;
+    flex: 0 0 40%;
+    overflow: hidden;
+    padding: 30px;
+    position: relative;
+    &:before {
+      background: rgba(#fff,.1);
+      border-radius: 50%;
+      bottom: 20%;
+      content: '';
+      display: block;
+      height: 200px;
+      left: -20%;
+      position: absolute;
+      width: 200px;
+    }
+    .title {
+      color: #fff;
+      font-size: 3.2rem;
+      line-height: 2.4rem;
+      &:after {
+        background: #fff;
+        content: '';
+        display: block;
+        height: 6px;
+        margin-top: 10px;
+        width: 30px;
+      }
+    }
+  }
+  .column__right {
+    background: #fff;
+    flex: 0 0 60%;
+    padding: 60px 90px;
+    @media screen and (max-width: 960px) {
+      padding: 40px 60px;
+    }
+    @media screen and (max-width: 768px) {
+      padding: 20px 40px;
+    }
+    @media screen and (max-width: 480px) {
+      padding: 20px;
+    }
+  }
+  form {
+    textarea,
+    select,
+    input,
+    button {
+      color: #333;
+      font-family: 'Roboto', sans-serif;
+      font-size: 1.4rem;
+    }
+    @mixin btn {
+      background: $maincolor;
+      box-shadow: 0px 1px 5px -1px rgba(0, 0, 0, 0.2);
+      color: #fff;
+      display: inline-block;
+      height: 45px;
+      text-transform: uppercase;
+      transition: background-color .3s ease, color .3s ease;
+      width: 115px;
+      &:hover {
+        background: #fff;
+        color: $maincolor;
+      }
+      &.disabled {
+        opacity: .3;
+        &:hover {
+          background: $maincolor;
+          color: #fff;
+          cursor: default;
+        }
+      }
+    }
+    .validate__btn {
+      @include btn;
+      width: 145px;;
+    }
+    .form__btn {
+      @include btn;
+    }
+    .form__field {
+      margin-bottom: 20px;
+      position: relative;
+      z-index: 5;
+      &--radio {
+        align-items: center;
+        display: flex;
+      }
+      select {
+        border-bottom: 2px solid rgba($maincolor, 0.2);
+        padding: 10px 0;
+        transition: border-bottom .3s ease;
+        width: 100%;
+        &:focus {
+          border-bottom: 2px solid rgba($maincolor, 0.7);
+        }
+        &.error {
+          color: $errorColor;
+        }
+      }
+      input:not([type=radio]):not([type=checkbox]),
+      textarea {
+        border: 0;
+        border-bottom: 2px solid rgba($maincolor, 0.2);
+        font-size: 1.6rem;
+        padding: 10px 0;
+        transition: border-bottom .3s ease;
+        width: 100%;
+        &:focus {
+          border-bottom: 2px solid rgba($maincolor, 0.7);
+        }
+        &.dirty,
+        &:focus {
+          + label {
+            color: $maincolor;
+            top: -10px;
+          }
+        }
+        &.error {
+          + label {
+            color: $errorColor;
+          }
+        }
+        + label {
+          color: #aaa;
+          font-size: 1.4rem;
+          left: 0;
+          pointer-events: none;
+          position: absolute;
+          top: 10px;
+          transition: top .5s ease, color .5s ease;
+          z-index: 10;
+        }
+      }
+      textarea {
+        height: 160px;
+      }
+      @mixin checkboxAndRadio {
+        height: 0;
+        opacity: 0;
+        width: 0;
+        &:checked {
+          + label {
+            &:before {
+              background: $maincolor;
+            }
+          }
+        }
+        &.error {
+          + label {
+            color: $errorColor;
+          }
+        }
+        &:focus {
+          + label {
+            &:before {
+              border: 2px solid rgba($maincolor, .5);
+            }
+          }
+        }
+        + label {
+          align-items: center;
+          display: flex;
+          font-size: 1.6rem;
+          margin-right: 10px;
+        }
+      }
+      @mixin checkboxAndRadioBefore {
+        background: #fff;
+        border: 2px solid $maincolor;
+        box-shadow: 0px 1px 5px -1px rgba(0, 0, 0, 0.2);
+        content: '';
+        display: inline-block;
+        flex: 0 0 20px;
+        height: 20px;
+        margin-right: 5px;
+        transition: background-color .2s ease;
+        width: 20px;
+      }
+      input[type=radio] {
+        @include checkboxAndRadio;
+        position: absolute; // FF fix
+        z-index: -1; // FF fix
+        + label {
+          &:before {
+            @include checkboxAndRadioBefore;
+            border-radius: 50%;
+          }
+        }
+      }
+      input[type=checkbox] {
+        @include checkboxAndRadio;
+        + label {
+          &:before {
+            @include checkboxAndRadioBefore;
+          }
+        }
+      }
+    }
+  }
+}

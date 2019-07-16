@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Simple Validator Test</title>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:500&display=swap" rel="stylesheet">
+</head>
+<body>
+  <section class="wrapper">
+    <div class="form__wrapper">
+      <div class="column__left">
+        <p class="title">Test form</p>
+      </div>
+      <div class="column__right">
+        <form>
+          <div class="form__field">
+            <select id="form__subject" name="subject" autocomplete="off">
+              <option disabled selected value>Select subject</option>
+              <option value="subject-1">Subject #1</option>
+              <option value="subject-2">Subject #2</option>
+              <option value="subject-3">Subject #3</option>
+            </select>
+          </div>
+          <div class="form__field">
+            <input type="text" id="form__name" name="name" autocomplete="off" />
+            <label>Name</label>
+          </div>
+          <div class="form__field">
+            <input type="email" id="form__email" name="email" autocomplete="off" />
+            <label>E-mail</label>
+          </div>
+          <div class="form__field">
+            <textarea id="form__message" name="message" autocomplete="off"></textarea>
+            <label>Message</label>
+          </div>
+          <div class="form__field form__field--radio">
+            <input type="radio" id="radio1" name="radiogroup" value="radio1" autocomplete="off" />
+            <label for="radio1">Radio #1</label>
+            <input type="radio" id="radio2" name="radiogroup" value="radio2" autocomplete="off" />
+            <label for="radio2">Radio #2</label>
+            <input type="radio" id="radio3" name="radiogroup" value="radio3" autocomplete="off" />
+            <label for="radio3">Radio #3</label>
+          </div>
+          <div class="form__field">
+            <input type="checkbox" id="form__checkbox" name="checkbox" value="ok" autocomplete="off" />
+            <label for="form__checkbox">Checkbox #1</label>
+          </div>
+          <button type="submit" class="form__btn disabled">Submit</button>
+          <button type="button" class="validate__btn">Validate form</button>
+        </form>
+      </div>
+    </div>
+  </section>
+</body>
+</html>
