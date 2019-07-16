@@ -1,11 +1,11 @@
 # simple-validator
 
-Simple JS form validator.
+Simple JS form validator is style-agnostic form validation. Styling of inputs responding to their validity state is up to you, library provides only js logic for validation. By default it will add `.dirty` class to inputs which were manipulated by user, and `.error` class to mark invalid ones, but you can change those classes in library config.
 
 ## Basic config
 
 First create form fields with unique `name` and `id` attributes for each field (except for radio buttons where we use one name for whole group of buttons).
-We also create a button that will handle form submition. By default I have added here `.disabled` class, which will be toggled during validations.
+We also create a button that will handle form submition. By default I have added `.disabled` class to the btn, which will be toggled during validations.
 
 ```html
 <select id="form__subject" name="subject">
@@ -61,7 +61,8 @@ const formConfig = {
   ],
   submitBtn: {
     selector: '.form__btn',
-    onSubmit: sendForm
+    onSubmit: sendForm,
+    disabledClass: '.disabled'
   }
 }
 
@@ -79,38 +80,46 @@ And that's basically all, we should have our form validations up and ready.
 
 ## Form config object
 
-Here you can see form config object with all currently available options with their default values:
+Here you can see form config object with all currently available options and their default values:
 
 ```javascript
 const formConfig = {
   fields: [
     {
-      selector: '#fieldId', // any selector that can be used with document.querySelector function in JS
+      selector: '#fieldId',             // any selector that can be used with document.querySelector function in JS
       options: {
-        validators = {
-          minLength: 6,
-          maxLength: 10,
-          numericality: true,
-          regex: /^[^\D]\d{0,9}((\.|,)\d{1,})?$/
-        },
+        validators = {},
         required = false,
-        touched = false, // we can pass 'touched' state on form creation if for example we prepopulate form with value
-        ignoreDefaults = false, // this will ignore defaul validators, currently applied only to email inputs
-        validateAutomatically = true // we can turn off automatic validation if we want to validate only by force
+        touched = false,                // we can pass 'touched' state on form creation if for example we prepopulate form with value
+        ignoreDefaults = false,         // this will ignore default validators, currently applied only to email inputs
+        validateAutomatically = true    // we can turn off automatic validation if we want to validate only by force
       }
     },
     {
       // radio buttons do not accept any validators except for 'required' option
       selector: 'radiogroup',
       options: {
-        type: 'radio', // for radio buttons it is required to pass 'type' option
+        type: 'radio',                  // for radio buttons it is required to pass 'type' option
         required: true
       }
     }
   ],
   submitBtn: {
     selector: '.btnClass',
-    onSubmit: () => console.log('Callback function called on successfull form submit')
-  }
+    onSubmit: () => console.log('Callback function called on successfull form submit'),
+    disabledClass: '.disabled'          // class to add when button should be disabled (form invalid)
+  },
+  errorClass: '.err',                   // class to add on error
+  dirtyClass: '.drr'                    // class to add to touched inputs
+}
+```
+## Available validators
+
+```javascript
+{
+  minLength: 6,
+  maxLength: 10,
+  numericality: true,
+  regex: /^[^\D]\d{0,9}((\.|,)\d{1,})?$/
 }
 ```
