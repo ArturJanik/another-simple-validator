@@ -1,4 +1,4 @@
-# simple-validator
+# another-simple-validator
 
 Simple JS form validator is style-agnostic form field validator. Styling of inputs responding to their validity state is up to you, library provides only js logic for validation. 
 By default it will add `.dirty` class to inputs which were manipulated by user, and `.error` class to mark invalid ones, but you can change these classes in library config.
