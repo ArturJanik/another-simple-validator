@@ -1,5 +1,5 @@
 import FormField, { RadioField } from './form_field';
-import { removeDotFromClassname } from './helpers';
+import { removeDotFromClassname } from '../utilities/helpers';
 
 class Form {
   constructor(
