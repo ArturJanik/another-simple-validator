@@ -1,3 +1,5 @@
+import * as validators from '../utilities/validators';
+
 class FormField {
   constructor(
     selector,
@@ -60,35 +62,11 @@ class FormField {
     }
   }
 
-  validateEmail = val => {
-    const pattern = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
-    return pattern.test(val);
-  }
-
-  validateLength = (type, value, borderLength) => {
-    if(type === 'min'){
-      return value.length >= borderLength;
-    }
-
-    if(type === 'max'){
-      return value.length <= borderLength;
-    }
-  }
-
-  validateNumericality = (value) => {
-    const pattern = /^[^\D]\d{0,9}((\.|,)\d{1,})?$/;
-    return pattern.test(value);
-  }
-
-  validatePattern = (value, pattern) => {
-    return pattern.test(value);
-  }
-
   defaultValidations = () => {
     let valid = true;
     switch (this.type) {
       case 'email':
-        valid = this.validateEmail(this.value);
+        valid = validators.validateEmail(this.value);
         return valid;
       default:
         return valid;
@@ -98,23 +76,23 @@ class FormField {
   customValidations = (currentState) => {
     let valid = currentState;
 
-    for (const validator in this.validators) {
-      const validatorSetting = this.validators[validator];
+    for (const v in this.validators) {
+      const validatorSetting = this.validators[v];
 
-      switch (validator) {
+      switch (v) {
         case 'minLength':
-          valid = this.validateLength('min', this.value, validatorSetting);
+          valid = validators.validateLength('min', this.value, validatorSetting);
           break;
         case 'maxLength':
-          valid = this.validateLength('max', this.value,  validatorSetting);
+          valid = validators.validateLength('max', this.value,  validatorSetting);
           break;
         case 'numerical':
-          valid = this.validateNumericality(this.value);
+          valid = validators.validateNumericality(this.value);
           break;
         case 'regex':
-          valid = this.validatePattern(this.value, validatorSetting);
+          valid = validators.validatePattern(this.value, validatorSetting);
         default:
-          console.warn(`Validator ${validator} unavailable.`);
+          console.warn(`Validator ${v} unavailable.`);
           break;
       }
       if(!valid) return valid;
