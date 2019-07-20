@@ -4,7 +4,7 @@ module.exports = {
   mode: 'production',
   devtool: 'source-map',
   entry: {
-    app: './src/scripts/form.js'
+    app: './src/scripts/index.js'
   },
   module: {
     rules: [
