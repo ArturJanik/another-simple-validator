@@ -1,5 +1,5 @@
 import './_scss/main.scss';
-import AnotherSimpleValidator from './scripts';
+import SimpleVal from './scripts';
 
 const sendForm = (fieldValues) => {
   console.log(fieldValues);
@@ -54,6 +54,6 @@ const formConfig = {
   }
 }
 
-const form = new AnotherSimpleValidator(formConfig);
+const form = new SimpleVal(formConfig);
 
 document.querySelector('.validate__btn').addEventListener('click', form.forceFieldValidation);

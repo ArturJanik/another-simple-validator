@@ -20,8 +20,8 @@ You should see test form, which you can modify to your needs to test validator.
 Run `npm i another-simple-validator`.
 
 ```javascript
-import Form from 'another-simple-validator';
-const form = new Form({});
+import SimpleVal from 'another-simple-validator';
+const form = new SimpleVal({});
 ```
 
 #### Classic js

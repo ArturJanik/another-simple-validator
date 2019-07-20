@@ -65,23 +65,23 @@ class FormField {
     return pattern.test(val);
   }
 
-  validateLength = (type, borderLength) => {
+  validateLength = (type, value, borderLength) => {
     if(type === 'min'){
-      return this.value.length >= borderLength;
+      return value.length >= borderLength;
     }
 
     if(type === 'max'){
-      return this.value.length <= borderLength;
+      return value.length <= borderLength;
     }
   }
 
-  validateNumericality = () => {
+  validateNumericality = (value) => {
     const pattern = /^[^\D]\d{0,9}((\.|,)\d{1,})?$/;
-    return pattern.test(this.value);
+    return pattern.test(value);
   }
 
-  validatePattern = (pattern) => {
-    return pattern.test(this.value);
+  validatePattern = (value, pattern) => {
+    return pattern.test(value);
   }
 
   defaultValidations = () => {
@@ -103,16 +103,16 @@ class FormField {
 
       switch (validator) {
         case 'minLength':
-          valid = this.validateLength('min', validatorSetting);
+          valid = this.validateLength('min', this.value, validatorSetting);
           break;
         case 'maxLength':
-          valid = this.validateLength('max', validatorSetting);
+          valid = this.validateLength('max', this.value,  validatorSetting);
           break;
         case 'numerical':
-          valid = this.validateNumericality();
+          valid = this.validateNumericality(this.value);
           break;
         case 'regex':
-          valid = this.validatePattern(validatorSetting);
+          valid = this.validatePattern(this.value, validatorSetting);
         default:
           console.warn(`Validator ${validator} unavailable.`);
           break;
